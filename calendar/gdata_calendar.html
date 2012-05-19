@@ -1,0 +1,124 @@
+<!doctype html public "-//w3c//dtd html 4.01 transitional//en">
+<html>
+<head>
+<title>gdata_calendar.html</title>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+
+    
+    <script src="../jquery-1.7.2.js"></script>
+       
+	<script>
+
+		//localhost
+		//localhost
+
+
+		$(document).ready(function(){
+			//alert("oooooooooo");
+			$("#spinner").hide();
+		});
+
+		function loginGoogleAccount(){
+			$("#spinner").show();
+			//alert("oooooooooo");
+			$.get("http://localhost/calendar/gdata_curl.php?method=1"
+				,function(data){
+					$("#debug").html(data);
+					$("#spinner").hide();
+				}
+			);
+		}
+
+		function getAllCalendars(){
+			$("#spinner").show();
+			//alert("oooooooooo");
+
+			var str = "";
+			$.getJSON("http://localhost/calendar/gdata_curl.php?method=2"
+				,function(dataResp){
+
+					//$("#debug").html(dataResp);
+					//$("#spinner").hide();
+
+
+					str += dataResp.data.author.email;
+					str += "<hr>";
+					var items = dataResp.data.items;
+					//alert(items);
+					//for(var item in items){
+						//str += item.title;
+						//str += "<br>";
+					//}
+					$.each(items, function(i,item){
+						str += i + " " + item.title;
+						str += "<br>";
+					});
+
+					$("#debug").html(str);
+					$("#spinner").hide();
+					
+					
+				}
+			);
+		}
+
+		function createNewCalendar(){
+			$("#spinner").show();
+			//alert("oooooooooo");
+			$.get("http://localhost/calendar/gdata_curl.php?method=3"
+				,function(data){
+					$("#debug").html(data);
+					$("#spinner").hide();
+				}
+			);
+		}
+
+		function test(){
+			$("#spinner").show();
+			$.get("http://localhost/calendar/gdata_curl.php?method=0"
+				,function(data){
+					$("#debug").html(data);
+					$("#spinner").hide();
+				}
+			);
+
+		}
+
+
+	</script>
+
+	<style type="text/css">
+		#debug {
+            position: relative;
+            *display: table-cell;
+            vertical-align: middle;
+            *text-align: center;
+            border: 1px solid red;
+            height: 100%;
+            width: 100%;
+        }
+	</style>
+
+</head>
+<body>
+
+<img id="spinner" src="spinner.gif">
+<br>
+
+<a href="javascript:;" onclick="test()">test</a>
+<br>
+<br>
+<a href="javascript:;" onclick="loginGoogleAccount()">Click here to authenticate through Google.</a>
+<br>
+<br>
+<a href="javascript:;" onclick="getAllCalendars()">Click here to show Google Calendar.</a>
+<br>
+<br>
+<a href="javascript:;" onclick="createNewCalendar()">Create new Google Calendar.</a>
+
+
+<hr></hr>
+<div id="debug">
+
+</body>
+</html>

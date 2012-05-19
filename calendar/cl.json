@@ -1,0 +1,10 @@
+{
+	"data":{
+		"title":"test calendar",
+	    "details":"This calendar contains the practice schedule and game times.",
+	    "timeZone":"America",
+	    "hidden":false,
+	    "color":"#2952A3",
+	    "location":"Oakland"
+	}
+}
